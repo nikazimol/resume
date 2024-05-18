@@ -1,0 +1,266 @@
+% AUTHOR: Sina Atalay
+% LICENSE: https://github.com/sinaatalay/rendercv/blob/main/LICENSE
+
+\documentclass[12pt, letterpaper]{article}
+\usepackage[T2A]{fontenc}
+\usepackage{hyphenat}
+\usepackage[english, russian]{babel}
+% Packages:
+\usepackage[
+        ignoreheadfoot, % set margins without considering header and footer
+        top=2 cm, % seperation between body and page edge from the top
+        bottom=2 cm, % seperation between body and page edge from the bottom
+        left=2 cm, % seperation between body and page edge from the left
+        right=2 cm, % seperation between body and page edge from the right
+        footskip=1.0 cm, % seperation between body and footer
+        % showframe % for debugging 
+    ]{geometry} % for adjusting page geometry
+\usepackage[explicit]{titlesec} % for customizing section titles
+\usepackage{tabularx} % for making tables with fixed width columns
+\usepackage{array} % tabularx requires this
+\usepackage[dvipsnames]{xcolor} % for coloring text
+\definecolor{primaryColor}{RGB}{0, 79, 144} % define primary color
+\usepackage{enumitem} % for customizing lists
+\usepackage{fontawesome5} % for using icons
+\usepackage{amsmath} % for math
+\usepackage[
+    pdftitle={Резюме Ксения Корниенко},
+    pdfauthor={Ксения Корниенко},
+    colorlinks=true,
+    urlcolor=primaryColor
+]{hyperref} % for links, metadata and bookmarks
+\usepackage[pscoord]{eso-pic} % for floating text on the page
+\usepackage{calc} % for calculating lengths
+\usepackage{bookmark} % for bookmarks
+\usepackage{lastpage} % for getting the total number of pages
+\usepackage[default, type1]{sourcesanspro} % for using source sans 3 font
+\usepackage{ifthen}
+
+% Some settings:
+\pagestyle{empty} % no header or footer
+\setcounter{secnumdepth}{0} % no section numbering
+\setlength{\parindent}{0pt} % no indentation
+\setlength{\topskip}{0pt} % no top skip
+\makeatletter
+\let\ps@customFooterStyle\ps@plain % Copy the plain style to customFooterStyle
+\patchcmd{\ps@customFooterStyle}{\thepage}{
+    \color{gray}\textit{\small Ксения Корниенко}
+}{}{} % replace number by desired string
+\makeatother
+\pagestyle{customFooterStyle}
+
+\titleformat{\section}{
+        % make the font size of the section title large and color it with the primary color
+        \Large\color{primaryColor}
+    }{
+    }{
+    }{
+        % print bold title, give 0.15 cm space and draw a line of 0.8 pt thickness
+        % from the end of the title to the end of the body
+        \textbf{#1}\hspace{0.15cm}\titlerule[0.8pt]\hspace{-0.1cm}
+    }[] % section title formatting
+
+\titlespacing{\section}{
+        % left space:
+        0pt
+    }{
+        % top space:
+        0.3 cm
+    }{
+        % bottom space:
+        0.2 cm
+    } % section title spacing
+
+\newcolumntype{L}[1]{
+    >{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}p{#1}
+} % left-aligned fixed width column type
+\newcolumntype{R}[1]{
+    >{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}p{#1}
+} % right-aligned fixed width column type
+\newcolumntype{K}[1]{
+    >{\let\newline\\\arraybackslash\hspace{0pt}}X
+} % justified flexible width column type
+\setlength\tabcolsep{-1.5pt} % no space between columns
+\newenvironment{highlights}{
+        \begin{itemize}[
+                topsep=0pt,
+                parsep=0.10 cm,
+                partopsep=0pt,
+                itemsep=0pt,
+                after=\vspace{-1\baselineskip},
+                leftmargin=0.4 cm + 3pt
+            ]
+    }{
+        \end{itemize}
+    } % new environment for highlights
+
+\newenvironment{header}{
+        \setlength{\topsep}{0pt}\par\kern\topsep\centering\color{primaryColor}\linespread{1.5}
+    }{
+        \par\kern\topsep
+    } % new environment for the header
+
+\newcommand{\placelastupdatedtext}{% \placetextbox{<horizontal pos>}{<vertical pos>}{<stuff>}
+  \AddToShipoutPictureFG*{% Add <stuff> to current page foreground
+    \put(
+        \LenToUnit{\paperwidth-2 cm-0.2 cm+0.05cm},
+        \LenToUnit{\paperheight-1.0 cm}
+    ){\vtop{{\null}\makebox[0pt][c]{
+        \small\color{gray}\textit{Обновлено в Мае 2024}\hspace{\widthof{Обновлено в Мае 2024}}
+    }}}%
+  }%
+}%
+
+% save the original href command in a new command:
+\let\hrefWithoutArrow\href
+ % new command for external links:
+\renewcommand{\href}[2]{\hrefWithoutArrow{#1}{\mbox{\ifthenelse{\equal{#2}{}}{ }{#2 }\raisebox{.15ex}{\footnotesize \faExternalLink*}}}}
+
+\let\originalTabularx\tabularx
+\let\originalEndTabularx\endtabularx
+
+\renewenvironment{tabularx}{\bgroup\centering\originalTabularx}{\originalEndTabularx\par\egroup}
+
+% For TextEntrys (see https://tex.stackexchange.com/a/600/287984):
+\def\changemargin#1#2{\list{}{\rightmargin#2\leftmargin#1\topsep=0pt\itemsep=0pt\parsep=0pt\parskip=0pt\labelwidth=0pt\itemindent=0pt\labelsep=0pt}\item[]}
+\let\endchangemargin=\endlist 
+
+% Ensure that generate pdf is machine readable/ATS parsable
+\pdfgentounicode=1
+
+\begin{document}
+    \placelastupdatedtext
+    \begin{header}
+        \fontsize{30 pt}{30 pt}
+        \textbf{Ксения Корниенко}
+
+        \vspace{0.3 cm}
+
+        \normalsize
+        \mbox{\hrefWithoutArrow{tel:+79683713899}{{\footnotesize\faPhone*}\hspace*{0.13cm}+7 968 371 38 99}}
+        \hspace*{0.5 cm}
+        \mbox{\hrefWithoutArrow{mailto:nikazimol05@mail.ru}{{\small\faEnvelope[regular]}\hspace*{0.13cm}nikazimol05@mail.ru}}
+        \hspace*{0.5 cm}
+        \mbox{{\small\faMapMarker*}\hspace*{0.13cm}Москва}
+        \hspace*{0.5 cm}
+        \mbox{\hrefWithoutArrow{https://linkedin.com/in/\%D0\%BA\%D1\%81\%D0\%B5\%D0\%BD\%D0\%B8\%D1\%8F-\%D0\%BA\%D0\%BE\%D1\%80\%D0\%BD\%D0\%B8\%D0\%B5\%D0\%BD\%D0\%BA\%D0\%BE-a0928a30a}{{\small\faLinkedinIn}\hspace*{0.13cm}Linkedin}}
+        \hspace*{0.5 cm}
+    \end{header}
+
+    \vspace{0.3 cm}
+
+    
+    \section{Образование}
+
+        \begin{tabularx}{
+            \textwidth-0.4 cm-0.13cm
+        }{
+            K{0.2 cm}
+            R{4.1 cm}
+        }
+            \textbf{Высшая школа экономики}, Прикладная математика и информатика
+
+            \vspace{0.10 cm}
+
+            \begin{highlights}
+                \item \textbf{Пройденые курсы:} Математический анализ, Линейная алгебра, Python для сбора и анализа данных, Программирование на C++.
+            \end{highlights}
+            &
+            
+
+            01.2024 - н. в.
+        \end{tabularx}
+        \vspace{0.2 cm}
+        \begin{tabularx}{
+            \textwidth-0.4 cm-0.13cm
+        }{
+            K{0.2 cm}
+            R{4.1 cm}
+        }
+            \textbf{МГТУ им. Баумана}, Прикладная математика и информатика
+
+            \vspace{0.10 cm}
+
+            \begin{highlights}
+                \item \textbf{Пройденые курсы:} Дискретная математика на Golang, Компьютерные сети, Основы програмирования, Языки и методы программирования, Алгоритмы и структуры данных.
+            \end{highlights}
+            &
+            
+
+            09.2022 - 12.2023
+        \end{tabularx}
+
+
+    
+    \section{Проекты}
+
+        \begin{tabularx}{
+            \textwidth-0.4 cm-0.13cm
+        }{
+            K{0.2 cm}
+            R{4.1 cm}
+        }
+            \textbf{LabReportSync}
+
+            \vspace{0.10 cm}
+
+            \begin{highlights}
+                \item Разработка бэкенда в рамках командного проекта для автоматизации загрузки результатов лабораторных работ в ВУЗе.
+                \item Использовались Golang, Javasript, HTML, CSS.
+            \end{highlights}
+            &
+            
+
+            08.2023
+        \end{tabularx}
+
+    
+
+
+    \section{Технологии}
+
+        \begingroup\leftskip=0.2 cm
+        \advance\csname @rightskip\endcsname 0.2 cm
+        \advance\rightskip 0.2 cm
+
+        \textbf{Языки программирования:} C++, Golang, JavaScript \par\endgroup
+
+        \vspace{0.2 cm}
+        \begingroup\leftskip=0.2 cm
+        \advance\csname @rightskip\endcsname 0.2 cm
+        \advance\rightskip 0.2 cm
+
+        \textbf{Иностранные языки:} Английский (B2) \par\endgroup
+
+    \section{Дополнительные курсы}
+
+        \begingroup\leftskip=0.2 cm
+        \advance\csname @rightskip\endcsname 0.2 cm
+        \advance\rightskip 0.2 cm
+
+        \textbf{Программирование на Golang:} \mbox{\hrefWithoutArrow{https://stepik.org/cert/2144361}{Сертификат}} \par\endgroup
+
+        \vspace{0.2 cm}
+        \begingroup\leftskip=0.2 cm
+        \advance\csname @rightskip\endcsname 0.2 cm
+        \advance\rightskip 0.2 cm
+
+        \textbf{Введение в программирование (C++):} \mbox{\hrefWithoutArrow{https://stepik.org/cert/1185579}{Сертификат}} \par\endgroup
+
+        \vspace{0.2 cm}
+        \begingroup\leftskip=0.2 cm
+        \advance\csname @rightskip\endcsname 0.2 cm
+        \advance\rightskip 0.2 cm
+
+        \textbf{JavaScript для начинающих:} \mbox{\hrefWithoutArrow{https://stepik.org/cert/2151305}{Сертификат}} \par\endgroup
+
+        \vspace{0.2 cm}
+        \begingroup\leftskip=0.2 cm
+        \advance\csname @rightskip\endcsname 0.2 cm
+        \advance\rightskip 0.2 cm
+
+        \textbf{HTML CSS JS:} \mbox{\hrefWithoutArrow{https://stepik.org/cert/2152277}{Сертификат}} \par\endgroup
+
+    
+
+\end{document}
